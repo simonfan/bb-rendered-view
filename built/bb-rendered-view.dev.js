@@ -58,7 +58,8 @@ define('bb-rendered-view',['require','exports','module','lowercase-backbone','lo
 		 */
 		render: function render(options) {
 
-			var template = this.template;
+			var template = this.template,
+				html;
 
 			if (template) {
 				// only render if a template is available
@@ -66,20 +67,17 @@ define('bb-rendered-view',['require','exports','module','lowercase-backbone','lo
 				// parse out data from options
 				var data = this.templateDataParse(options);
 
-				console.log(data)
-
 				if (_.isFunction(template)) {
 					// run template fn straightforward
-					var html = template(data);
+					html = template(data);
 
 				} else if (_.isString(template)) {
 					// compile template then run
-					var html = this.templateCompiler(template)(data);
+					html = this.templateCompiler(template)(data);
 				}
 
+				// insert html
 				this.$el.html(html);
-
-
 			}
 
 			return this;

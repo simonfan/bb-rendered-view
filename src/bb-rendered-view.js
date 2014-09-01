@@ -58,7 +58,8 @@ define(function (require, exports, module) {
 		 */
 		render: function render(options) {
 
-			var template = this.template;
+			var template = this.template,
+				html;
 
 			if (template) {
 				// only render if a template is available
@@ -68,11 +69,11 @@ define(function (require, exports, module) {
 
 				if (_.isFunction(template)) {
 					// run template fn straightforward
-					var html = template(data);
+					html = template(data);
 
 				} else if (_.isString(template)) {
 					// compile template then run
-					var html = this.templateCompiler(template)(data);
+					html = this.templateCompiler(template)(data);
 				}
 
 				// insert html
